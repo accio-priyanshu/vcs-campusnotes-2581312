@@ -1,0 +1,8 @@
+#!/bin/sh
+for f in $(git diff --cached --name-only --diff-filter=ACM); do
+  if git show ":$f" | grep -qE "[T]ODO|[F]IXME"; then
+    echo "ERROR: $f contains a to-do marker. Commit rejected."
+    exit 1
+  fi
+done
+exit 0
